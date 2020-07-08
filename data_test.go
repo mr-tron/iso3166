@@ -3,7 +3,7 @@ package iso3166_test
 import (
 	"testing"
 
-	"github.com/ferdypruis/iso3166"
+	"github.com/mr-tron/iso3166"
 )
 
 // TestData asserts existing codes never change

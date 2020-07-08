@@ -1,6 +1,6 @@
 # iso3166
-[![GoDoc](https://godoc.org/github.com/ferdypruis/iso3166?status.svg)](https://godoc.org/github.com/ferdypruis/iso3166)
-[![GolangCI](https://golangci.com/badges/github.com/ferdypruis/iso3166.svg)](https://golangci.com/r/github.com/ferdypruis/iso3166)
+[![GoDoc](https://godoc.org/github.com/mr-tron/iso3166?status.svg)](https://godoc.org/github.com/mr-tron/iso3166)
+[![GolangCI](https://golangci.com/badges/github.com/mr-tron/iso3166.svg)](https://golangci.com/r/github.com/mr-tron/iso3166)
 
 A Go package providing all ISO 3166-1 country codes as constants of type `iso3166.Country`.
 
@@ -13,7 +13,7 @@ Countries can either be hardcoded using the available constants or loaded from a
 ## Examples
 Use the constants to directly reference countries.
 ```go
-fmt.Println("The numeric code for Antarctica is", iso3166.AQ.Numeric())
+fmt.Println("The numeric code for Antarctica is", iso3166.AQ.StringNumeric())
 
 // Output:
 // The numeric code for Antarctica is 010
