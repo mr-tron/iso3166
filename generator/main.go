@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"text/template"
 )
 
@@ -20,7 +21,7 @@ const outfile = `data.go`
 type tplCountry struct {
 	Alpha2  string
 	Alpha3  string
-	Numeric string
+	Numeric int
 	Name    string
 }
 
@@ -89,12 +90,15 @@ func countryCodes() map[string]tplCountry {
 			// Skip countries without code
 			continue
 		}
-
+		numeric, err := strconv.Atoi(record["ISO3166-1-numeric"])
+		if err != nil {
+			log.Fatalf("error parsing numeric ")
+		}
 		var c = tplCountry{
 			Name:    record["CLDR display name"],
 			Alpha2:  record["ISO3166-1-Alpha-2"],
 			Alpha3:  record["ISO3166-1-Alpha-3"],
-			Numeric: record["ISO3166-1-numeric"],
+			Numeric: numeric,
 		}
 
 		countries[c.Alpha2] = c

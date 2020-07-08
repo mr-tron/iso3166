@@ -109,7 +109,7 @@ func TestErrorString(t *testing.T) {
 }
 
 func ExampleCountry() {
-	fmt.Println("The numeric code for Antarctica is", iso3166.AQ.Numeric())
+	fmt.Println("The numeric code for Antarctica is", iso3166.AQ.StringNumeric())
 
 	// Output:
 	// The numeric code for Antarctica is 010

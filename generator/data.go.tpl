@@ -15,11 +15,11 @@ var countries = [...]struct {
 	// ISO 3166-1 three-letter alphabetic code
 	alpha3 string
 	// ISO 3166-1 numeric code
-	numeric string
+	numeric int
 	// English name
 	name string
 }{
 {{- range .countries}}
-	{{.Alpha2}}: {alpha2: "{{.Alpha2}}", alpha3: "{{.Alpha3}}", numeric: "{{.Numeric}}", name: {{.Name | printf "%q"}}},
+	{{.Alpha2}}: {alpha2: "{{.Alpha2}}", alpha3: "{{.Alpha3}}", numeric: {{.Numeric}}, name: {{.Name | printf "%q"}}},
 {{- end}}
 }

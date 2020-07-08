@@ -1,6 +1,11 @@
 // Package iso3166 provides the ISO 3166-1 codes for the representation of countries.
 package iso3166
 
+import (
+	"fmt"
+	"strconv"
+)
+
 // Country is a representation of a country.
 type Country uint16
 
@@ -11,7 +16,10 @@ func (c Country) Alpha2() string { return countries[c].alpha2 }
 func (c Country) Alpha3() string { return countries[c].alpha3 }
 
 // Numeric returns the ISO 3166-1 three-digit numeric code.
-func (c Country) Numeric() string { return countries[c].numeric }
+func (c Country) Numeric() int { return countries[c].numeric }
+
+// StringNumeric returns the ISO 3166-1 three-digit numeric code.
+func (c Country) StringNumeric() string { return fmt.Sprintf("%03d", countries[c].numeric) }
 
 // Name returns the English name.
 func (c Country) Name() string { return countries[c].name }
@@ -24,7 +32,7 @@ func FromAlpha2(alpha2 string) (Country, error) {
 			return Country(c), nil
 		}
 	}
-	return Country(0), Error("no country exists with alpha2-code " + alpha2)
+	return 0, Error("no country exists with alpha2-code " + alpha2)
 }
 
 // FromAlpha3 returns Country for the three-letter alpha3 code.
@@ -35,18 +43,22 @@ func FromAlpha3(alpha3 string) (Country, error) {
 			return Country(c), nil
 		}
 	}
-	return Country(0), Error("no country exists with alpha3-code " + alpha3)
+	return 0, Error("no country exists with alpha3-code " + alpha3)
 }
 
 // FromNumeric returns Country for the three-digit numeric code.
 // Or an error if it does not exist.
 func FromNumeric(numeric string) (Country, error) {
+	n, err := strconv.Atoi(numeric)
+	if err != nil {
+		return 0, Error(err.Error())
+	}
 	for c, country := range countries {
-		if country.numeric == numeric {
+		if country.numeric == n {
 			return Country(c), nil
 		}
 	}
-	return Country(0), Error("no country exists with numeric-code " + numeric)
+	return 0, Error("no country exists with numeric-code " + numeric)
 }
 
 // Must panics if err is non-nil and otherwise returns c.
